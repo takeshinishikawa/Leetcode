@@ -8,6 +8,7 @@ namespace pascal
     {
         static void Main(string[] args)
         {
+            //Generate(0);
             for (int numRows = 1; numRows <= 30; numRows++)
             {
                 int counter1 = 1;
@@ -34,9 +35,11 @@ namespace pascal
                 Console.WriteLine();
             }
         }
-
         static public IList<IList<int>> Generate(int numRows)
         {
+            if (numRows < 1 || numRows > 30)
+                throw new ArgumentOutOfRangeException(null, "The program accepts only inputs from 1 to 30.");
+                        
             IList<IList<int>> result = new List<IList<int>>();
             IList<int> currRow = new List<int>();
 

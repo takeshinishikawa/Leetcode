@@ -8,20 +8,36 @@ namespace roman
     {
         static void Main(string[] args)
         {
-
             Console.WriteLine(RomanToInt("III"));
+            Console.WriteLine(RomanToInt("IIII"));
             Console.WriteLine(RomanToInt("LVIII"));
             Console.WriteLine(RomanToInt("MCMXCIV"));
+            Console.WriteLine(RomanToInt("T"));
+            Console.WriteLine(RomanToInt("MMMM"));
         }
 
 
         static int RomanToInt(string s)
         {
+            //Verify if respects the min and max lenght
             if (s.Length < 1 || s.Length > 15)
             {
                 Console.WriteLine("The value do not respect the constraints");
                 return 0;
             }
+
+            int needle = 0;
+            //Verify if there is any invalid numeric roman symbol
+            while (needle < s.Length)
+            {
+                if (s[needle] != 'I' && s[needle] != 'V' && s[needle] != 'X' && s[needle] != 'L' && s[needle] != 'C' && s[needle] != 'D' && s[needle] != 'M')
+                {
+                    Console.Write("The value do not respect the constraints. Invalid symbol. ");
+                    return 0;
+                }
+                needle++;
+            }
+
             var romanChars = new Dictionary<char, int>();
             romanChars.Add('I', 1);
             romanChars.Add('V', 5);
@@ -43,6 +59,12 @@ namespace roman
                     result -= currNumber;
                 else
                     result += currNumber;
+            }
+            //Verify if respects the range proposed
+            if (result < 1 || result > 3999)
+            {
+                Console.Write("The value do not respect the constraints. Value is not in the range from 1 to 3999. ");
+                return 0;
             }
             return result;
         }
